@@ -91,4 +91,25 @@ public class productoDAO {
         }
         return productos;
     }
+
+    //Obtener los productos de la categoría “Electrónica”.
+    public List<producto> obtenerProductosElectronica() {
+        List<producto> productos = new ArrayList<>();
+        try (Connection conn = DriverManager.getConnection(url)) {
+            String sql = "select * from productos where categoria = 'Electronica'";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+                String nombre = rs.getString("nombre");
+                String categoria = rs.getString("categoria");
+                double precio = rs.getDouble("precio");
+                int stock = rs.getInt("stock");
+                producto p = new producto(nombre, categoria, precio, stock);
+                productos.add(p);
+            }
+        } catch (SQLException e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+        return productos;
+    }
 }

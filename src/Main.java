@@ -3,7 +3,7 @@ import modelo.producto;
 
 public class Main {
     public static void main(String[] args) {
-        obtenerSoloNombreYPrecio();
+        obtenerProductosElectronica();
     }
 
     public static void insertarProducto() {
@@ -33,5 +33,10 @@ public class Main {
     public static void obtenerSoloNombreYPrecio() {
         productoDAO pDAO = new productoDAO();
         System.out.println(pDAO.obtenerSoloNombreYPrecio());
+    }
+
+    public static void obtenerProductosElectronica() {
+        productoDAO pDAO = new productoDAO();
+        System.out.println(pDAO.obtenerProductosElectronica());
     }
 }
