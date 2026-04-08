@@ -4,7 +4,9 @@ import modelo.producto;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class productoDAO {
     private String url= "jdbc:sqlite:ud6.sqlite";
@@ -66,6 +68,23 @@ public class productoDAO {
                 int stock = rs.getInt("stock");
                 producto p = new producto(nombre, categoria, precio, stock);
                 productos.add(p);
+            }
+        } catch (SQLException e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+        return productos;
+    }
+
+    public Map<String, Double> obtenerSoloNombreYPrecio() {
+        Map<String, Double> productos = new HashMap<>();
+        try (Connection conn = DriverManager.getConnection(url)) {
+            String sql = "select nombre, precio from productos";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+                String nombre = rs.getString("nombre");
+                double precio = rs.getDouble("precio");
+                productos.put(nombre, precio);
             }
         } catch (SQLException e) {
             System.out.println("Error: " + e.getMessage());
