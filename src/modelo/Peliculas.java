@@ -1,19 +1,19 @@
 package modelo;
 
-public class peliculas {
+public class Peliculas {
     private String titulo;
     private String genero;
     private Integer duracion;;
     private Double puntuacion;
 
-    public peliculas(String titulo, String genero, Integer duracion, Double puntuacion) {
+    public Peliculas(String titulo, String genero, Integer duracion, Double puntuacion) {
         this.titulo = titulo;
         this.genero = genero;
         this.duracion = duracion;
         this.puntuacion = puntuacion;
     }
 
-    public peliculas() {
+    public Peliculas() {
     }
 
     public String getTitulo() {

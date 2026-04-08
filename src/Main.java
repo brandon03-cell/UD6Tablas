@@ -1,5 +1,5 @@
-import dao.productoDAO;
-import modelo.producto;
+import dao.ProductoDAO;
+import modelo.Producto;
 
 public class Main {
     public static void main(String[] args) {
@@ -7,36 +7,36 @@ public class Main {
     }
 
     public static void insertarProducto() {
-        producto p = new producto("Gato", "Decoración", 25, 1);
-        productoDAO pDAO = new productoDAO();
+        Producto p = new Producto("Gato", "Decoración", 25, 1);
+        ProductoDAO pDAO = new ProductoDAO();
         pDAO.insertarProducto(p);
     }
 
     public static void actualizarProducto() {
-        producto p = new producto("Gato", "Decoración", 35, 4);
-        productoDAO pDAO = new productoDAO();
+        Producto p = new Producto("Gato", "Decoración", 35, 4);
+        ProductoDAO pDAO = new ProductoDAO();
         pDAO.actualizarProducto(p, 11);
     }
 
     public static void eliminarProducto() {
-        producto p = new producto("Gato", "Decoración", 35, 4);
-        productoDAO pDAO = new productoDAO();
+        Producto p = new Producto("Gato", "Decoración", 35, 4);
+        ProductoDAO pDAO = new ProductoDAO();
         pDAO.eliminarProducto(11);
     }
 
     public static void mostrarProducto() {
-        productoDAO pDAO = new productoDAO();
+        ProductoDAO pDAO = new ProductoDAO();
         System.out.println(pDAO.obtenerProductos());
         //System.out.println(pDAO.obtenerProductos().size());
     }
 
     public static void obtenerSoloNombreYPrecio() {
-        productoDAO pDAO = new productoDAO();
+        ProductoDAO pDAO = new ProductoDAO();
         System.out.println(pDAO.obtenerSoloNombreYPrecio());
     }
 
     public static void obtenerProductosElectronica() {
-        productoDAO pDAO = new productoDAO();
+        ProductoDAO pDAO = new ProductoDAO();
         System.out.println(pDAO.obtenerProductosElectronica());
     }
 }

@@ -1,6 +1,6 @@
 package dao;
 
-import modelo.producto;
+import modelo.Producto;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -8,10 +8,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class productoDAO {
+public class ProductoDAO {
     private String url= "jdbc:sqlite:ud6.sqlite";
 
-    public void insertarProducto(producto p) {
+    public void insertarProducto(Producto p) {
         try (Connection conn = DriverManager.getConnection(url)) {
             String sql = "insert into productos (nombre, categoria, precio, stock)" +
                     " values (?, ?, ?, ?)";
@@ -26,7 +26,7 @@ public class productoDAO {
         }
     }
 
-    public void actualizarProducto(producto p, int id) {
+    public void actualizarProducto(Producto p, int id) {
         try (Connection conn = DriverManager.getConnection(url)) {
             String sql = "update productos set nombre = ?, categoria = ?, precio = ?," +
                     " stock = ? where id = ?";
@@ -55,8 +55,8 @@ public class productoDAO {
         }
     }
 
-    public List<producto> obtenerProductos() {
-        List<producto> productos = new ArrayList<>();
+    public List<Producto> obtenerProductos() {
+        List<Producto> productos = new ArrayList<>();
         try (Connection conn = DriverManager.getConnection(url)) {
             String sql = "select * from productos";
             PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -66,7 +66,7 @@ public class productoDAO {
                 String categoria = rs.getString("categoria");
                 double precio = rs.getDouble("precio");
                 int stock = rs.getInt("stock");
-                producto p = new producto(nombre, categoria, precio, stock);
+                Producto p = new Producto(nombre, categoria, precio, stock);
                 productos.add(p);
             }
         } catch (SQLException e) {
@@ -93,8 +93,8 @@ public class productoDAO {
     }
 
     //Obtener los productos de la categoría “Electrónica”.
-    public List<producto> obtenerProductosElectronica() {
-        List<producto> productos = new ArrayList<>();
+    public List<Producto> obtenerProductosElectronica() {
+        List<Producto> productos = new ArrayList<>();
         try (Connection conn = DriverManager.getConnection(url)) {
             String sql = "select * from productos where categoria = 'Electronica'";
             PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -104,7 +104,7 @@ public class productoDAO {
                 String categoria = rs.getString("categoria");
                 double precio = rs.getDouble("precio");
                 int stock = rs.getInt("stock");
-                producto p = new producto(nombre, categoria, precio, stock);
+                Producto p = new Producto(nombre, categoria, precio, stock);
                 productos.add(p);
             }
         } catch (SQLException e) {
