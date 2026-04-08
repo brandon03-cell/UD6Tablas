@@ -6,6 +6,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.List;
 
 public class productoDAO {
     private String url= "jdbc:sqlite:ud6.sqlite";
@@ -52,5 +53,17 @@ public class productoDAO {
         } catch (SQLException e) {
             System.out.println("Error: " + e.getMessage());
         }
+    }
+
+    public List<producto> obtenerProductos() {
+        try (Connection conn = DriverManager.getConnection(url)) {
+            String sql = "select * from productos";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.executeQuery();
+            System.out.println("gg");
+        } catch (SQLException e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+        return null;
     }
 }
