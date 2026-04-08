@@ -1,0 +1,27 @@
+package dao;
+
+import modelo.producto;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
+public class productoDAO {
+    private String url= "jdbc:sqlite:ud6.sqlite";
+
+    public void insertarProducto(producto p) {
+        try (Connection conn = DriverManager.getConnection(url)) {
+            String sql = "insert into productos (nombre, categoria, precio, stock)" +
+                    " values (?, ?, ?, ?)";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, p.getNombre());
+            pstmt.setString(2, p.getCategoria());
+            pstmt.setDouble(3, p.getPrecio());
+            pstmt.setInt(4, p.getStok());
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+    }
+}
