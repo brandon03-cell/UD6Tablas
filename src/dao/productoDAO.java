@@ -24,4 +24,21 @@ public class productoDAO {
             System.out.println("Error: " + e.getMessage());
         }
     }
+
+    public void actualizarProducto(producto p, int id) {
+        try (Connection conn = DriverManager.getConnection(url)) {
+            String sql = "update productos set nombre = ?, categoria = ?, precio = ?," +
+                    " stock = ? where id = ?";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1, p.getNombre());
+            pstmt.setString(2, p.getCategoria());
+            pstmt.setDouble(3, p.getPrecio());
+            pstmt.setInt(4, p.getStok());
+            pstmt.setInt(5, id);
+            pstmt.executeUpdate();
+            System.out.println("gg");
+        } catch (SQLException e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+    }
 }
