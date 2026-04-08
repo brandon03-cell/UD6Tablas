@@ -41,4 +41,16 @@ public class productoDAO {
             System.out.println("Error: " + e.getMessage());
         }
     }
+
+    public void eliminarProducto(int id) {
+        try (Connection conn = DriverManager.getConnection(url)) {
+            String sql = "delete from productos where id = ?";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1, id);
+            pstmt.executeUpdate();
+            System.out.println("gg");
+        } catch (SQLException e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+    }
 }
