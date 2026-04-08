@@ -2,10 +2,7 @@ package dao;
 
 import modelo.producto;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.List;
 
 public class productoDAO {
@@ -59,8 +56,14 @@ public class productoDAO {
         try (Connection conn = DriverManager.getConnection(url)) {
             String sql = "select * from productos";
             PreparedStatement pstmt = conn.prepareStatement(sql);
-            pstmt.executeQuery();
-            System.out.println("gg");
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+                String nombre = rs.getString("nombre");
+                String categoria = rs.getString("categoria");
+                double precio = rs.getDouble("precio");
+                int stock = rs.getInt("stock");
+                producto p = new producto(nombre, categoria, precio, stock);
+            }
         } catch (SQLException e) {
             System.out.println("Error: " + e.getMessage());
         }
