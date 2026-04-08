@@ -23,4 +23,8 @@ public class Main {
         productoDAO pDAO = new productoDAO();
         pDAO.eliminarProducto(11);
     }
+
+    public static void mostrarProducto() {
+
+    }
 }

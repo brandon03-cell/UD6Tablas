@@ -3,6 +3,7 @@ package dao;
 import modelo.producto;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class productoDAO {
@@ -53,6 +54,7 @@ public class productoDAO {
     }
 
     public List<producto> obtenerProductos() {
+        List<producto> productos = new ArrayList<>();
         try (Connection conn = DriverManager.getConnection(url)) {
             String sql = "select * from productos";
             PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -63,10 +65,11 @@ public class productoDAO {
                 double precio = rs.getDouble("precio");
                 int stock = rs.getInt("stock");
                 producto p = new producto(nombre, categoria, precio, stock);
+                productos.add(p);
             }
         } catch (SQLException e) {
             System.out.println("Error: " + e.getMessage());
         }
-        return null;
+        return productos;
     }
 }
